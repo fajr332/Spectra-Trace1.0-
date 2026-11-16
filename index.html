@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spectra Trace | سبيكترا تريس</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f4e9;--ink:#0e3f3c;--card:#fff;--tint:#d3e2dc;--line:#dcdfd0;--acc:#C95D4F;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "IBM Plex Sans","IBM Plex Sans Arabic",Arial,sans-serif}
+[dir=rtl] body,[dir=rtl]{font-family:"IBM Plex Sans Arabic","IBM Plex Sans",Arial,sans-serif}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;align-items:center;max-width:860px;margin:0 auto;padding:12px 18px;background:var(--bg)}
+.bar b{font-size:18px}
+.lang{border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:99px;padding:5px 16px;font:inherit;font-weight:700;cursor:pointer}
+main{max-width:860px;margin:0 auto;padding:0 18px 36px}
+section{margin-top:34px}
+h1{font-size:clamp(38px,9vw,56px);line-height:1.05;margin:12px 0 8px}
+h2{font-size:23px;margin:0 0 12px}
+.badge{display:inline-block;border:1.5px solid var(--ink);border-radius:99px;padding:2px 14px;font-size:14px;font-weight:700}
+.tag{font-size:20px;font-weight:700;margin:0 0 10px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:18px}
+.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;border:0;border-radius:12px;padding:12px 22px;font:inherit;font-weight:700;cursor:pointer}
+.btn.off{opacity:.45;pointer-events:none}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+ol.st{list-style:none;padding:0;margin:0;counter-reset:n}
+ol.st li{counter-increment:n;display:flex;gap:12px;align-items:flex-start;padding:9px 0}
+ol.st li:before{content:counter(n);flex:none;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-weight:700;display:grid;place-items:center;font-size:15px;margin-top:2px}
+.note{background:var(--tint);border-radius:14px;padding:14px 16px;margin-top:14px;font-size:15.5px}
+.note p{margin:4px 0}
+.note p:before{content:"●";color:var(--acc);margin-inline-end:8px;font-size:11px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.fi{display:flex;flex-direction:column;gap:8px}
+.fi small{color:#4b6a67;font-size:14.5px;line-height:1.5;flex:1}
+.fi h3{margin:0;font-size:18px}
+.fmt{align-self:flex-start;background:var(--tint);border-radius:8px;padding:1px 10px;font-weight:700;font-size:13px}
+#msg{min-height:24px;font-size:14.5px;margin-top:10px}
+.gt{font-weight:700;margin:16px 0 4px}
+ul.rf{list-style:none;margin:0;padding:0}
+ul.rf li{padding:9px 0;border-bottom:1px solid var(--line)}
+ul.rf li:last-child{border:0}
+ul.rf a{color:var(--ink);font-weight:500;word-break:break-word}
+ul.rf span{display:block;font-size:14px;color:#4b6a67}
+.ct a{color:var(--ink);font-weight:700}
+footer{text-align:center;font-size:14px;color:#4b6a67;margin-top:30px}
+#pdfsrc{position:absolute;left:-9999px;top:0;width:700px;background:#fff;color:#111;padding:30px;font:15px/1.7 "IBM Plex Sans","IBM Plex Sans Arabic",Arial,sans-serif}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="bar"><b>Spectra Trace</b><button class="lang" id="lg">عربي</button></div>
+<main>
+<section style="margin-top:8px">
+<span class="badge" data-k="badge"></span>
+<h1>Spectra Trace</h1>
+<p class="tag" data-k="tag"></p>
+<p data-k="intro" style="margin:0"></p>
+</section>
+
+<section>
+<h2 data-k="tryT"></h2>
+<div class="card">
+<ol class="st" id="steps"></ol>
+<div class="row"><a class="btn" id="open" target="_blank" rel="noopener" data-k="open"></a><a class="btn ghost" id="vid" target="_blank" rel="noopener" data-k="video" hidden></a></div>
+<div class="note" id="notes"></div>
+</div>
+</section>
+
+<section>
+<h2 data-k="smpT"></h2>
+<div class="grid">
+<div class="card fi"><span class="fmt">PDF</span><h3 data-k="f1t"></h3><small data-k="f1d"></small><button class="btn" data-f="pdf" data-k="dl"></button></div>
+<div class="card fi"><span class="fmt">WORD</span><h3 data-k="f2t"></h3><small data-k="f2d"></small><button class="btn" data-f="docx" data-k="dl"></button></div>
+<div class="card fi"><span class="fmt">EXCEL</span><h3 data-k="f3t"></h3><small data-k="f3d"></small><button class="btn" data-f="xlsx" data-k="dl"></button></div>
+</div>
+<div id="msg"></div>
+</section>
+
+<section>
+<h2 data-k="refT"></h2>
+<div class="card" id="refs"></div>
+</section>
+
+<section>
+<h2 data-k="whoT"></h2>
+<div class="card ct">
+<p style="margin-top:0" data-k="who"></p>
+<p><b data-k="names"></b></p>
+<p data-k="collab" style="margin-bottom:6px"></p>
+<p style="margin:0">✉ <a href="mailto:fjoorymog@gmail.com">fjoorymog@gmail.com</a><br>☎ <a href="tel:0500373407" dir="ltr">0500373407</a></p>
+</div>
+</section>
+<footer data-k="foot"></footer>
+</main>
+<div id="pdfsrc"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+var PLATFORM_URL="https://spectra-trace1-0.vercel.app/";
+var VIDEO_URL="";
+var T={
+en:{badge:"Graduation project · Prototype",tag:"A forensic prototype that traces leaked organizational documents to the recipient.",
+intro:"Spectra Trace helps organizations find out whose copy of a document was leaked. Every copy carries its own hidden identifier linked to its recipient, so a leaked copy can be traced back to the person it was issued to.",
+tryT:"Try the prototype",open:"Open the platform",video:"Watch the demo video",
+steps:["Download a sample file below (fake data, made for quick testing).","In the platform, add an employee (use a made-up name and email).","Choose the sample file and that employee, then protect (encrypt) the file.","Optional: try editing the protected file, take a screenshot of it, or keep it as it is.","Open the leak detection page, upload that file, and see which employee it was issued to."],
+notes:["Please do not upload your own or any real documents. Use the sample files only.","Best experienced on a laptop. The site is crowded on phones.","This is a prototype launched for trial and understanding only, not for official use. We are still developing the idea and innovation."],
+smpT:"Sample files",dl:"Download",f1t:"Confidential Board Memo",f1d:"A fictional acquisition plan for a fictional company.",f2t:"Salary Review",f2d:"Six fictional employees with current and proposed salaries.",f3t:"Q4 Budget Forecast",f3d:"Six fictional departments with Q3 actuals and Q4 forecasts.",
+nodl:"Downloads are not available in this view. Please open the page in a regular browser or contact us.",err:"Could not create the file. Please try again.",
+refT:"References",g1:"Sources used on the poster",g2:"Standards and tools used in the prototype",
+whoT:"Who we are",who:"We are cybersecurity students at Qassim University. Spectra Trace is our graduation project.",names:"Fajr Almugri, Alanoud Almazyad, Latefa Aldhobei",collab:"Interested in collaborating or sharing feedback? Contact us.",foot:"Spectra Trace · Graduation project · Qassim University"},
+ar:{badge:"مشروع تخرج · نموذج أولي",tag:"نموذج أولي لمنصة جنائية رقمية تتتبع الوثائق المسرّبة إلى مستلمها.",
+intro:"تساعد سبيكترا تريس المنظمات على معرفة من صدرت له النسخة المسرّبة من وثيقة. تحمل كل نسخة معرّفاً مخفياً خاصاً بها مرتبطاً بمستلمها، فيمكن تتبع النسخة المسرّبة إلى من صدرت له.",
+tryT:"جرّب النموذج الأولي",open:"افتح المنصة",video:"شاهد الفيديو التوضيحي",
+steps:["نزّل أحد الملفات النموذجية أدناه (بيانات وهمية جُهّزت لسرعة التجربة).","في المنصة، أضف موظفاً (استخدم اسماً وبريداً وهميين).","اختر الملف النموذجي والموظف، ثم قم بتشفير الملف (حمايته).","اختياري: جرّب التعديل على الملف المحمي، أو التقط له لقطة شاشة، أو اتركه كما هو.","افتح صفحة كشف التسريب، وارفع ذلك الملف، وشاهد لأي موظف صدرت النسخة."],
+notes:["نرجو عدم رفع ملفاتك الخاصة أو أي وثائق حقيقية. استخدم الملفات النموذجية فقط.","الأفضل تجربتها من لابتوب، فالموقع يظهر مزدحماً على الجوال.","هذا نموذج أولي أُطلق للتجربة والفهم فقط، وليس للاستخدام الرسمي. ما زلنا نطوّر الفكرة والابتكار."],
+smpT:"الملفات النموذجية",dl:"تحميل",f1t:"مذكرة مجلس إدارة سرية",f1d:"خطة استحواذ وهمية لشركة وهمية.",f2t:"مراجعة الرواتب",f2d:"ستة موظفين وهميين مع الرواتب الحالية والمقترحة.",f3t:"توقعات ميزانية الربع الرابع",f3d:"ستة أقسام وهمية مع الفعلي للربع الثالث والمتوقع للرابع.",
+nodl:"التحميل غير متاح في هذا العرض. افتح الصفحة في متصفح عادي أو تواصل معنا.",err:"تعذّر إنشاء الملف. حاول مرة أخرى.",
+refT:"المراجع",g1:"مصادر استُخدمت في الملصق",g2:"معايير وأدوات استُخدمت في النموذج الأولي",
+whoT:"من نحن",who:"نحن طالبات أمن سيبراني في جامعة القصيم. سبيكترا تريس هي مشروع تخرجنا.",names:"العنود المزيد، فجر المقري، لطيفة الضبيعي",collab:"مهتم بالتعاون أو لديك ملاحظات؟ تواصل معنا.",foot:"سبيكترا تريس · مشروع تخرج · جامعة القصيم"}};
+var R1=[
+["Ponemon Institute and DTEX Systems, 2026 Cost of Insider Risks Global Report","https://ponemon.dtex.ai/","Time to contain and annual cost of insider incidents","مدة احتواء حوادث التهديد الداخلي وتكلفتها السنوية"],
+["Microsoft Learn, Describe data loss prevention in Microsoft Purview","https://learn.microsoft.com/en-us/training/modules/describe-purview-data-solutions/4-describe-data-loss-prevention","Data loss prevention","منع فقدان البيانات"],
+["Microsoft Tech Community, Dynamic watermarking for sensitivity labels in Word, Excel, and PowerPoint","https://techcommunity.microsoft.com/blog/microsoft-security-blog/general-availability-dynamic-watermarking-for-sensitivity-labels-in-word-excel-a/4382614","Visible watermarks","العلامات المائية المرئية"],
+["VdoCipher, Forensic Watermarking","https://www.vdocipher.com/glossary/forensic-watermarking/","Invisible forensic watermarking","العلامات المائية الجنائية المخفية"]];
+var R2=[["NIST FIPS 197: Advanced Encryption Standard (AES)","https://doi.org/10.6028/NIST.FIPS.197"],["NIST FIPS 180-4: Secure Hash Standard (SHA-256)","https://doi.org/10.6028/NIST.FIPS.180-4"],["OpenTimestamps","https://opentimestamps.org"],["Tesseract OCR","https://github.com/tesseract-ocr/tesseract"],["Tesseract.js","https://github.com/naptha/tesseract.js"],["pdf-lib","https://pdf-lib.js.org"],["Sharp","https://sharp.pixelplumbing.com"],["Next.js","https://nextjs.org/docs"],["Supabase","https://supabase.com/docs"]];
+var L="en",DL=null;
+function $(s){return document.querySelector(s)}
+function li(t,u,d){return '<li><a href="'+u+'" target="_blank" rel="noopener">'+t+'</a>'+(d?'<span>'+d+'</span>':'')+'</li>'}
+function render(){
+ var D=T[L];document.documentElement.lang=L;document.documentElement.dir=L=="ar"?"rtl":"ltr";
+ document.querySelectorAll("[data-k]").forEach(function(e){e.textContent=D[e.dataset.k]});
+ $("#lg").textContent=L=="ar"?"English":"عربي";
+ $("#steps").innerHTML=D.steps.map(function(s){return "<li><span>"+s+"</span></li>"}).join("");
+ $("#notes").innerHTML=D.notes.map(function(s){return "<p>"+s+"</p>"}).join("");
+ $("#refs").innerHTML='<div class="gt" style="margin-top:0">'+D.g1+'</div><ul class="rf">'+R1.map(function(r){return li(r[0],r[1],L=="ar"?r[3]:r[2])}).join("")+'</ul><div class="gt">'+D.g2+'</div><ul class="rf">'+R2.map(function(r){return li(r[0],r[1])}).join("")+'</ul>';
+ var o=$("#open");if(PLATFORM_URL){o.href=PLATFORM_URL;o.classList.remove("off")}else{o.removeAttribute("href");o.classList.add("off");o.textContent=L=="ar"?"الرابط قريباً":"Link coming soon"}
+ var v=$("#vid");if(VIDEO_URL){v.href=VIDEO_URL;v.hidden=false}
+}
+$("#lg").onclick=function(){L=L=="en"?"ar":"en";render()};
+render();
+if(window.claude&&claude.use){claude.use("downloads").then(function(d){DL=d;if(!d)$("#msg").textContent=T[L].nodl}).catch(function(){})}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+var MARK="SAMPLE: FAKE DATA | نموذج تجريبي: بيانات وهمية";
+function pdfHtml(){return '<div style="color:#b3261e;font-weight:700;border:1px solid #b3261e;padding:6px 10px;text-align:center">'+MARK+'</div>'+
+'<h2 style="margin:18px 0 4px">Confidential Board Memo | مذكرة مجلس إدارة سرية</h2><p style="margin:0;color:#555">Alpha Horizon Co. · Internal only | للاستخدام الداخلي فقط</p>'+
+'<h3>1. Proposed acquisition</h3><p>The board is asked to approve the acquisition of Northwind Labs for USD 12.4 million, expected to close in Q2.</p>'+
+'<h3>2. Key figures</h3><p>Annual revenue: USD 3.1M · Estimated savings: USD 0.9M per year · Integration cost: USD 1.2M.</p>'+
+'<h3>3. Next steps</h3><p>Legal review, employee communication plan, and final vote at the next board meeting.</p>'+
+'<div dir="rtl" style="border-top:1px solid #ccc;margin-top:18px;padding-top:6px"><h3>١. الاستحواذ المقترح</h3><p>يُطلب من المجلس الموافقة على الاستحواذ على شركة «نورث ويند لابز» بمبلغ 12.4 مليون دولار، ومن المتوقع إتمامه في الربع الثاني.</p>'+
+'<h3>٢. الأرقام الرئيسية</h3><p>الإيرادات السنوية: 3.1 مليون دولار · الوفورات المقدّرة: 0.9 مليون دولار سنوياً · تكلفة الدمج: 1.2 مليون دولار.</p>'+
+'<h3>٣. الخطوات التالية</h3><p>المراجعة القانونية، وخطة التواصل مع الموظفين، والتصويت النهائي في اجتماع المجلس القادم.</p></div>'}
+function makePdf(){var el=$("#pdfsrc");el.innerHTML=pdfHtml();
+ return document.fonts.ready.then(function(){return html2pdf().from(el).set({margin:10,html2canvas:{scale:2,useCORS:true},jsPDF:{unit:"mm",format:"a4"}}).outputPdf("blob")})}
+function px(t,o){o=o||{};return '<w:p><w:pPr>'+(o.r?'<w:bidi/>':'')+'</w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>'+(o.b?'<w:b/>':'')+(o.r?'<w:rtl/>':'')+(o.c?'<w:color w:val="'+o.c+'"/>':'')+'</w:rPr><w:t xml:space="preserve">'+esc(t)+'</w:t></w:r></w:p>'}
+function makeDocx(){
+ var rows=[["Employee | الموظف","Job title | المسمى","Current (SAR) | الحالي","Proposed (SAR) | المقترح"],["Sara Almutairi","Analyst","12,000","13,500"],["Omar Alharbi","Engineer","16,500","18,000"],["Lina Alsalem","Designer","11,000","12,000"],["Khalid Aldossari","Manager","24,000","26,500"],["Noura Alqahtani","Accountant","13,500","14,500"],["Yousef Alotaibi","Developer","17,000","19,000"]];
+ var tb='<w:tbl><w:tblPr><w:tblW w:w="9000" w:type="dxa"/><w:tblBorders>'+["top","left","bottom","right","insideH","insideV"].map(function(s){return '<w:'+s+' w:val="single" w:sz="4" w:color="888888"/>'}).join("")+'</w:tblBorders></w:tblPr>'+rows.map(function(r,i){return '<w:tr>'+r.map(function(c){return '<w:tc><w:tcPr><w:tcW w:w="2250" w:type="dxa"/></w:tcPr>'+px(c,{b:i==0})+'</w:tc>'}).join("")+'</w:tr>'}).join("")+'</w:tbl>';
+ var body=px(MARK,{b:1,c:"B3261E"})+px("Salary Review | مراجعة الرواتب",{b:1})+px("Confidential. Fictional data for testing only. | سري. بيانات وهمية للتجربة فقط.")+tb+
+ px("Confidential note: proposed changes are for management review before the year-end cycle.")+px("ملاحظة سرية: التعديلات المقترحة للمراجعة من الإدارة قبل دورة نهاية العام.",{r:1});
+ var z=new JSZip(),W='xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"',H='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+ z.file("[Content_Types].xml",H+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/></Types>');
+ z.file("_rels/.rels",H+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/></Relationships>');
+ z.file("word/document.xml",H+'<w:document '+W+'><w:body>'+body+'<w:sectPr><w:pgSz w:w="11906" w:h="16838"/></w:sectPr></w:body></w:document>');
+ z.file("docProps/core.xml",H+'<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:title>Salary Review (sample)</dc:title><dc:creator>Sample Author</dc:creator><dc:description>Sample file with fake data</dc:description></cp:coreProperties>');
+ return z.generateAsync({type:"blob"})}
+function makeXlsx(){
+ var a=[[MARK],[],["Department | القسم","Q3 actual (SAR) | الفعلي للربع الثالث","Q4 forecast (SAR) | المتوقع للربع الرابع"],["Operations | العمليات",1250000,1310000],["Marketing | التسويق",640000,720000],["Finance | المالية",410000,430000],["IT | تقنية المعلومات",980000,1100000],["HR | الموارد البشرية",330000,345000],["Legal | الشؤون القانونية",280000,300000]];
+ var ws=XLSX.utils.aoa_to_sheet(a);ws["!cols"]=[{wch:30},{wch:34},{wch:34}];
+ var wb=XLSX.utils.book_new();wb.Props={Title:"Q4 Budget Forecast (sample)",Author:"Sample Author",Subject:"Sample file with fake data"};
+ XLSX.utils.book_append_sheet(wb,ws,"Q4 Forecast");
+ return Promise.resolve(new Blob([XLSX.write(wb,{type:"array",bookType:"xlsx"})]))}
+var NM={pdf:["Confidential_Board_Memo_SAMPLE.pdf",makePdf],docx:["Salary_Review_SAMPLE.docx",makeDocx],xlsx:["Q4_Budget_Forecast_SAMPLE.xlsx",makeXlsx]};
+document.querySelectorAll("[data-f]").forEach(function(b){b.onclick=function(){
+ var n=NM[b.dataset.f];$("#msg").textContent="…";
+ if(!DL){$("#msg").textContent=T[L].nodl;return}
+ Promise.resolve(n[1]()).then(function(blob){return DL.save({filename:n[0],data:blob})}).then(function(){$("#msg").textContent=""}).catch(function(e){$("#msg").textContent=(e&&e.code=="declined")?"":T[L].err})}});
+</script>
+</body>
+</html>
